@@ -1,0 +1,27 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+jar{
+	manifest{
+			attributes ('Main-Class':'SEC_asgn_test_GUIAPP_v30')
+	}
+
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
+dependencies {
+	compile project(':Quiz')
+	compile project(':Question')
+}
+
+mainClassName = 'SEC_asgn_test_GUIAPP_v30'
+run{
+    standardInput = System.in
+}
+
+subprojects {
+    apply plugin: 'java'
+
+}
