@@ -1,0 +1,27 @@
+apply plugin: 'application'
+apply plugin: 'java'
+
+jar{
+	manifest{
+			attributes ('Main-Class':'QuizApplication')
+	}
+
+	from {
+		configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+	}
+}
+
+dependencies {
+	compile project(':Quiz')
+	compile project(':Question')
+}
+
+mainClassName = 'QuizApplication'
+run{
+    standardInput = System.in
+}
+
+subprojects {
+    apply plugin: 'java'
+
+}
